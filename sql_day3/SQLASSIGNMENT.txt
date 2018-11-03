@@ -1,0 +1,2107 @@
+Microsoft Windows [Version 10.0.16299.214]
+(c) 2017 Microsoft Corporation. All rights reserved.
+
+C:\Users\vidhyc>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sat Nov 3 12:03:46 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> spool on
+SQL> spool C:\164457_Vidhya\sql_day3\SQL_Assignment1.txt
+SQL> DROP TABLE EMP;
+DROP TABLE EMP
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> DROP TABLE DEPT;
+DROP TABLE DEPT
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> CREATE TABLE DEPT
+  2  (
+  3  DEPTNO NUMERIC(2) CONSTRAINT DEPTNO_DEPT_PK PRIMARY KEY,
+  4  DNAME VARCHAR(14),
+  5  LOC VARCHAR(13)
+  6  );
+
+Table created.
+
+SQL> INSERT INTO DEPT VALUES (10,'ACCOUNTING','NEW YORK');
+
+1 row created.
+
+SQL> INSERT INTO DEPT VALUES (20,'RESEARCH','DALLAS');
+
+1 row created.
+
+SQL> INSERT INTO DEPT VALUES (30,'SALES','CHICAGO');
+
+1 row created.
+
+SQL> INSERT INTO DEPT VALUES (40,'OPERATIONS','BOSTON');
+
+1 row created.
+
+SQL> CREATE TABLE EMP
+  2  (
+  3   EMPNO NUMERIC(4) CONSTRAINT EMPNO_EMP_PK PRIMARY KEY,
+  4   ENAME VARCHAR(10),
+  5   JOB   VARCHAR(9),
+  6   MGR   NUMERIC(4),
+  7   HIREDATE DATE,
+  8   SAL NUMERIC(7,2),
+  9   COMM NUMERIC(7,2),
+ 10   DEPTNO NUMERIC(2) CONSTRAINT DEPTNO_DEPT_FK REFERENCES DEPT(DEPTNO)
+ 11  );
+
+Table created.
+
+SQL>
+SQL> INSERT INTO EMP VALUES (7369,'SMITH','CLERK',7902,'17-DEC-80',800,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7499,'ALLEN','SALESMAN',7698,'20-FEB-81',1600,300,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7521,'WARD','SALESMAN',7698,'22-FEB-81',1250,500,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7566,'JONES','MANAGER',7839,'02-APR-81',2975,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7654,'MARTIN','SALESMAN',7698,'28-SEP-81',1250,1400,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7698,'BLAKE','MANAGER',7839,'01-MAY-81',2850,NULL,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7782,'CLARK','MANAGER',7839,'09-JUN-81',2450,NULL,10);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7788,'SCOTT','ANALYST',7566,'19-APR-87',3000,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7839,'KING','PRESIDENT',NULL,'17-NOV-81',5000,NULL,10);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7844,'TURNER','SALESMAN',7698,'08-SEP-81',1500,0,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7876,'ADAMS','CLERK',7788,'23-MAY-87',1100,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7900,'JAMES','CLERK',7698,'03-DEC-81','950',NULL,30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7902,'FORD','ANALYST',7566,'03-DEC-81',3000,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES (7934,'MILLER','CLERK',7782,'23-JAN-82',1300,NULL,10);
+
+1 row created.
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPTNO                                    NOT NULL NUMBER(2)
+ DNAME                                              VARCHAR2(14)
+ LOC                                                VARCHAR2(13)
+
+SQL> SELECT DEPTNO,DNAME FROM DEPT;
+
+    DEPTNO DNAME
+---------- --------------
+        10 ACCOUNTING
+        20 RESEARCH
+        30 SALES
+        40 OPERATIONS
+
+SQL> SELECT * FROM DEPT;
+
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+        20 RESEARCH       DALLAS
+        30 SALES          CHICAGO
+        40 OPERATIONS     BOSTON
+
+SQL> DESE EMP;
+SP2-0042: unknown command "DESE EMP" - rest of line ignored.
+SQL> DESC EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+SQL> SELECT ENAME FROM EMP;
+
+ENAME
+----------
+SMITH
+ALLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER
+ADAMS
+
+ENAME
+----------
+JAMES
+FORD
+MILLER
+
+14 rows selected.
+
+SQL> DESC EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+SQL> SELECT EMPNO,ENAME FROM EMP WHERE DEPTNO=30;
+
+     EMPNO ENAME
+---------- ----------
+      7499 ALLEN
+      7521 WARD
+      7654 MARTIN
+      7698 BLAKE
+      7844 TURNER
+      7900 JAMES
+
+6 rows selected.
+
+SQL> SELECT ENAME,EMPNO,DEPTNO FROM EMP WHERE JOB='CLERK';
+
+ENAME           EMPNO     DEPTNO
+---------- ---------- ----------
+SMITH            7369         20
+ADAMS            7876         20
+JAMES            7900         30
+MILLER           7934         10
+
+SQL> SELECT ENAME,EMPNO,DEPTNO,JOB FROM EMP WHERE JOB='CLERK';
+
+ENAME           EMPNO     DEPTNO JOB
+---------- ---------- ---------- ---------
+SMITH            7369         20 CLERK
+ADAMS            7876         20 CLERK
+JAMES            7900         30 CLERK
+MILLER           7934         10 CLERK
+
+SQL> SELECT DEPTNO,ENAME FROM EMP WHERE DEPTNO >= 20;
+
+    DEPTNO ENAME
+---------- ----------
+        20 SMITH
+        30 ALLEN
+        30 WARD
+        20 JONES
+        30 MARTIN
+        30 BLAKE
+        20 SCOTT
+        30 TURNER
+        20 ADAMS
+        30 JAMES
+        20 FORD
+
+11 rows selected.
+
+SQL> SELECT ENAME,SAL,COMM FROM EMP WHERE COMM > SAL;
+
+ENAME             SAL       COMM
+---------- ---------- ----------
+MARTIN           1250       1400
+
+SQL> SELECT ENAME,SAL,COMM FROM EMP WHERE COMM > (SAL*60/100);
+
+ENAME             SAL       COMM
+---------- ---------- ----------
+MARTIN           1250       1400
+
+SQL> SELECT ENAME,SAL,COMM FROM EMP WHERE COMM > (SAL*(60/100));
+
+ENAME             SAL       COMM
+---------- ---------- ----------
+MARTIN           1250       1400
+
+SQL> SELECT ENAME,SAL,COMM FROM EMP WHERE COMM > (SAL*(50/100));
+
+ENAME             SAL       COMM
+---------- ---------- ----------
+MARTIN           1250       1400
+
+SQL> SELECT ENAME,JOB,SAL FROM EMP WHERE DEPTNO=20 AND SAL>2000
+  2  ;
+
+ENAME      JOB              SAL
+---------- --------- ----------
+JONES      MANAGER         2975
+SCOTT      ANALYST         3000
+FORD       ANALYST         3000
+
+SQL> SELECT ENAME,JOB,SAL,DEPTNO FROM EMP WHERE DEPTNO=20 AND SAL>2000;
+
+ENAME      JOB              SAL     DEPTNO
+---------- --------- ---------- ----------
+JONES      MANAGER         2975         20
+SCOTT      ANALYST         3000         20
+FORD       ANALYST         3000         20
+
+SQL> SELECT ENAME,JOB,DEPTNO,SAL FROM EMP WHERE SAL>=1500;
+
+ENAME      JOB           DEPTNO        SAL
+---------- --------- ---------- ----------
+ALLEN      SALESMAN          30       1600
+JONES      MANAGER           20       2975
+BLAKE      MANAGER           30       2850
+CLARK      MANAGER           10       2450
+SCOTT      ANALYST           20       3000
+KING       PRESIDENT         10       5000
+TURNER     SALESMAN          30       1500
+FORD       ANALYST           20       3000
+
+8 rows selected.
+
+SQL> SELECT ENAME,JOB,DEPTNO,SAL FROM EMP WHERE SAL>=1500 AND JOB='SALESMAN' AND DEPTNO=30;
+
+ENAME      JOB           DEPTNO        SAL
+---------- --------- ---------- ----------
+ALLEN      SALESMAN          30       1600
+TURNER     SALESMAN          30       1500
+
+SQL> SELECT ENAME,JOB FROM EMP WHERE JOB='PRESIDENT' OR 'MANAGER';
+SELECT ENAME,JOB FROM EMP WHERE JOB='PRESIDENT' OR 'MANAGER'
+                                                           *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT ENAME,JOB FROM EMP WHERE JOB='PRESIDENT' OR JOB='MANAGER';
+
+ENAME      JOB
+---------- ---------
+JONES      MANAGER
+BLAKE      MANAGER
+CLARK      MANAGER
+KING       PRESIDENT
+
+SQL> SELECT ENAME,JOB FROM EMP WHERE JOB IN ('PRESIDENT','MANAGER');
+
+ENAME      JOB
+---------- ---------
+JONES      MANAGER
+BLAKE      MANAGER
+CLARK      MANAGER
+KING       PRESIDENT
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE DEPT <> 30;
+SELECT ENAME,DEPTNO,JOB FROM EMP WHERE DEPT <> 30
+                                       *
+ERROR at line 1:
+ORA-00904: "DEPT": invalid identifier
+
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE DEPTNO <> 30;
+
+ENAME          DEPTNO JOB
+---------- ---------- ---------
+SMITH              20 CLERK
+JONES              20 MANAGER
+CLARK              10 MANAGER
+SCOTT              20 ANALYST
+KING               10 PRESIDENT
+ADAMS              20 CLERK
+FORD               20 ANALYST
+MILLER             10 CLERK
+
+8 rows selected.
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE JOB='MANAGER' AND DEPTNO <> 30;
+
+ENAME          DEPTNO JOB
+---------- ---------- ---------
+JONES              20 MANAGER
+CLARK              10 MANAGER
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE JOB='MANAGER' AND DEPTNO <> 30;
+
+ENAME          DEPTNO JOB
+---------- ---------- ---------
+JONES              20 MANAGER
+CLARK              10 MANAGER
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE JOB IN ('MANAGER','CLERK') AND DEPTNO =10;
+
+ENAME          DEPTNO JOB
+---------- ---------- ---------
+CLARK              10 MANAGER
+MILLER             10 CLERK
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE JOB='MANAGER' AND (JOB='CLERK' AND DEPTNO=10);
+
+no rows selected
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE JOB='MANAGER' OR (JOB='CLERK' AND DEPTNO=10);
+
+ENAME          DEPTNO JOB
+---------- ---------- ---------
+JONES              20 MANAGER
+BLAKE              30 MANAGER
+CLARK              10 MANAGER
+MILLER             10 CLERK
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE JOB IN ('MANAGERS',10) AND JOB IN ('CLERK',20);
+SELECT ENAME,DEPTNO,JOB FROM EMP WHERE JOB IN ('MANAGERS',10) AND JOB IN ('CLERK',20)
+                                       *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE JOB IN ('MANAGERS',10);
+SELECT ENAME,DEPTNO,JOB FROM EMP WHERE JOB IN ('MANAGERS',10)
+                                       *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> SELECT ENAME,DEPTNO,JOB FROM EMP WHERE (JOB = 'MANAGERS' AND DEPTNO=10) OR (JOB='CLERK'AND DEPTNO=20);
+
+ENAME          DEPTNO JOB
+---------- ---------- ---------
+SMITH              20 CLERK
+ADAMS              20 CLERK
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1* SELECT ENAME,DEPTNO,JOB FROM EMP WHERE (JOB = 'MANAGER' AND DEPTNO=10) OR (JOB='CLERK'AND DEPTNO=20)
+SQL> /
+
+ENAME          DEPTNO JOB
+---------- ---------- ---------
+SMITH              20 CLERK
+CLARK              10 MANAGER
+ADAMS              20 CLERK
+
+SQL> SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> 'MANAGER','CLERK';
+SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> 'MANAGER','CLERK'
+                                                    *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> 'MANAGER' AND'CLERK';
+SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> 'MANAGER' AND'CLERK'
+                                                              *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> 'MANAGER' AND'CLERK';
+SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> 'MANAGER' AND'CLERK'
+                                                              *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> 'MANAGER' AND 'CLERK';
+SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> 'MANAGER' AND 'CLERK'
+                                                               *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> 'MANAGER' AND JOB <> 'CLERK';
+
+ENAME      JOB              SAL
+---------- --------- ----------
+ALLEN      SALESMAN        1600
+WARD       SALESMAN        1250
+MARTIN     SALESMAN        1250
+SCOTT      ANALYST         3000
+KING       PRESIDENT       5000
+TURNER     SALESMAN        1500
+FORD       ANALYST         3000
+
+7 rows selected.
+
+SQL> SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> IN ('MANAGER','CLERK');
+SELECT ENAME,JOB,SAL FROM EMP WHERE JOB <> IN ('MANAGER','CLERK')
+                                           *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> SELECT ENAME,JOB,SAL FROM EMP WHERE JOB NOT IN ('MANAGER','CLERK');
+
+ENAME      JOB              SAL
+---------- --------- ----------
+ALLEN      SALESMAN        1600
+WARD       SALESMAN        1250
+MARTIN     SALESMAN        1250
+SCOTT      ANALYST         3000
+KING       PRESIDENT       5000
+TURNER     SALESMAN        1500
+FORD       ANALYST         3000
+
+7 rows selected.
+
+SQL> SELECT ENAME,JOB,SAL FROM EMP WHERE JOB NOT IN ('MANAGER','CLERK') AND SAL>=2000;
+
+ENAME      JOB              SAL
+---------- --------- ----------
+SCOTT      ANALYST         3000
+KING       PRESIDENT       5000
+FORD       ANALYST         3000
+
+SQL> SELECT ENAME,SAL FROM EMP WHERE SAL BETWEEN 1200 AND 1400;
+
+ENAME             SAL
+---------- ----------
+WARD             1250
+MARTIN           1250
+MILLER           1300
+
+SQL> SELECT ENAME.JOB FROM EMP WHERE JOB IN ('CLERK','ANALYST','SALESMAN');
+SELECT ENAME.JOB FROM EMP WHERE JOB IN ('CLERK','ANALYST','SALESMAN')
+       *
+ERROR at line 1:
+ORA-00904: "ENAME"."JOB": invalid identifier
+
+
+SQL> SELECT ENAME,JOB FROM EMP WHERE JOB IN ('CLERK','ANALYST','SALESMAN');
+
+ENAME      JOB
+---------- ---------
+SMITH      CLERK
+ALLEN      SALESMAN
+WARD       SALESMAN
+MARTIN     SALESMAN
+SCOTT      ANALYST
+TURNER     SALESMAN
+ADAMS      CLERK
+JAMES      CLERK
+FORD       ANALYST
+MILLER     CLERK
+
+10 rows selected.
+
+SQL> SELECT ENAME,JOB FROM EMP WHERE JOB NOT IN ('CLERK','ANALYST','SALESMAN');
+
+ENAME      JOB
+---------- ---------
+JONES      MANAGER
+BLAKE      MANAGER
+CLARK      MANAGER
+KING       PRESIDENT
+
+SQL> SELECT ENAME,COMM FROM EMP WHERE COMM IS NULL;
+
+ENAME            COMM
+---------- ----------
+SMITH
+JONES
+BLAKE
+CLARK
+SCOTT
+KING
+ADAMS
+JAMES
+FORD
+MILLER
+
+10 rows selected.
+
+SQL> SELECT ENAME,COMM FROM EMP WHERE COMM = 0;
+
+ENAME            COMM
+---------- ----------
+TURNER              0
+
+SQL> SELECT ENAME,COMM FROM EMP WHERE COMM <> NULL;
+
+no rows selected
+
+SQL> SELECT ENAME,COMM,JOB FROM EMP WHERE COMM IS NOT NULL;
+
+ENAME            COMM JOB
+---------- ---------- ---------
+ALLEN             300 SALESMAN
+WARD              500 SALESMAN
+MARTIN           1400 SALESMAN
+TURNER              0 SALESMAN
+
+SQL> SELECT ENAME,COMM FROM EMP WHERE COMM IS NULL OR COMM < 100;
+
+ENAME            COMM
+---------- ----------
+SMITH
+JONES
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER              0
+ADAMS
+JAMES
+FORD
+MILLER
+
+11 rows selected.
+
+SQL> SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP WHERE NVL=250;
+SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP WHERE NVL=250
+                                                                *
+ERROR at line 1:
+ORA-00904: "NVL": invalid identifier
+
+
+SQL> SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP WHERE COMM NVL=250;
+SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP WHERE COMM NVL=250
+                                                                     *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP WHERE NVL(COMM,250);
+SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP WHERE NVL(COMM,250)
+                                                                            *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP;
+
+ENAME            COMM        SAL NET_EARNINGS
+---------- ---------- ---------- ------------
+SMITH                        800
+ALLEN             300       1600         1900
+WARD              500       1250         1750
+JONES                       2975
+MARTIN           1400       1250         2650
+BLAKE                       2850
+CLARK                       2450
+SCOTT                       3000
+KING                        5000
+TURNER              0       1500         1500
+ADAMS                       1100
+
+ENAME            COMM        SAL NET_EARNINGS
+---------- ---------- ---------- ------------
+JAMES                        950
+FORD                        3000
+MILLER                      1300
+
+14 rows selected.
+
+SQL> SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS,NVL(COMM,250) FROM EMP;
+
+ENAME            COMM        SAL NET_EARNINGS NVL(COMM,250)
+---------- ---------- ---------- ------------ -------------
+SMITH                        800                        250
+ALLEN             300       1600         1900           300
+WARD              500       1250         1750           500
+JONES                       2975                        250
+MARTIN           1400       1250         2650          1400
+BLAKE                       2850                        250
+CLARK                       2450                        250
+SCOTT                       3000                        250
+KING                        5000                        250
+TURNER              0       1500         1500             0
+ADAMS                       1100                        250
+
+ENAME            COMM        SAL NET_EARNINGS NVL(COMM,250)
+---------- ---------- ---------- ------------ -------------
+JAMES                        950                        250
+FORD                        3000                        250
+MILLER                      1300                        250
+
+14 rows selected.
+
+SQL> SELECT ENAME,COMM,SAL,(SAL+NVL(COMM,250)) AS NET_EARNINGS FROM EMP;
+
+ENAME            COMM        SAL NET_EARNINGS
+---------- ---------- ---------- ------------
+SMITH                        800         1050
+ALLEN             300       1600         1900
+WARD              500       1250         1750
+JONES                       2975         3225
+MARTIN           1400       1250         2650
+BLAKE                       2850         3100
+CLARK                       2450         2700
+SCOTT                       3000         3250
+KING                        5000         5250
+TURNER              0       1500         1500
+ADAMS                       1100         1350
+
+ENAME            COMM        SAL NET_EARNINGS
+---------- ---------- ---------- ------------
+JAMES                        950         1200
+FORD                        3000         3250
+MILLER                      1300         1550
+
+14 rows selected.
+
+SQL> SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP WHERE (SAL+COMM) > 2000;
+
+ENAME            COMM        SAL NET_EARNINGS
+---------- ---------- ---------- ------------
+MARTIN           1400       1250         2650
+
+SQL> SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP WHERE NET_EARNINGS > 2000;
+SELECT ENAME,COMM,SAL,(SAL+COMM) AS NET_EARNINGS FROM EMP WHERE NET_EARNINGS > 2000
+                                                                *
+ERROR at line 1:
+ORA-00904: "NET_EARNINGS": invalid identifier
+
+
+SQL> SELECT ENAME FROM EMP WHERE ENAME LIKE 'M%';
+
+ENAME
+----------
+MARTIN
+MILLER
+
+SQL> SELECT ENAME FROM EMP WHERE ENAME LIKE '%M';
+
+no rows selected
+
+SQL> SELECT ENAME FROM EMP WHERE ENAME LIKE 'M';
+
+no rows selected
+
+SQL> SELECT ENAME FROM EMP WHERE ENAME LIKE '%M%';
+
+ENAME
+----------
+SMITH
+MARTIN
+ADAMS
+JAMES
+MILLER
+
+SQL> SELECT ENAME FROM EMP WHERE ENAME LIKE 'M%M%M';
+
+no rows selected
+
+SQL> SELECT ENAME FROM EMP WHERE ENAME LIKE '%M%';
+
+ENAME
+----------
+SMITH
+MARTIN
+ADAMS
+JAMES
+MILLER
+
+SQL> SELECT ENAME FROM EMP WHERE ENAME LIKE '----N';
+
+no rows selected
+
+SQL> SELECT ENAME FROM EMP WHERE ENAME LIKE '____N';
+
+ENAME
+----------
+ALLEN
+
+SQL> SELECT ENAME FROM EMP WHERE ENAME LIKE '__R%';
+
+ENAME
+----------
+WARD
+MARTIN
+TURNER
+FORD
+
+SQL> SELECT ENAME,HIREDATE FROM EMP WHERE HIREDATE LIKE '%FEB%';
+
+ENAME      HIREDATE
+---------- ---------
+ALLEN      20-FEB-81
+WARD       22-FEB-81
+
+SQL> SELECT ENAME,HIREDATE FROM EMP WHERE HIREDATE = LAST_DAY(HIREDATE);
+
+no rows selected
+
+SQL> SELECT ENAME,HIREDATE,(SYSDATE-HIREDATE) FROM EMP;
+
+ENAME      HIREDATE  (SYSDATE-HIREDATE)
+---------- --------- ------------------
+SMITH      17-DEC-80         13835.6069
+ALLEN      20-FEB-81         13770.6069
+WARD       22-FEB-81         13768.6069
+JONES      02-APR-81         13729.6069
+MARTIN     28-SEP-81         13550.6069
+BLAKE      01-MAY-81         13700.6069
+CLARK      09-JUN-81         13661.6069
+SCOTT      19-APR-87         11521.6069
+KING       17-NOV-81         13500.6069
+TURNER     08-SEP-81         13570.6069
+ADAMS      23-MAY-87         11487.6069
+
+ENAME      HIREDATE  (SYSDATE-HIREDATE)
+---------- --------- ------------------
+JAMES      03-DEC-81         13484.6069
+FORD       03-DEC-81         13484.6069
+MILLER     23-JAN-82         13433.6069
+
+14 rows selected.
+
+SQL> SELECT ENAME,HIREDATE,(SYSDATE-HIREDATE) FROM EMP;
+
+ENAME      HIREDATE  (SYSDATE-HIREDATE)
+---------- --------- ------------------
+SMITH      17-DEC-80         13835.6072
+ALLEN      20-FEB-81         13770.6072
+WARD       22-FEB-81         13768.6072
+JONES      02-APR-81         13729.6072
+MARTIN     28-SEP-81         13550.6072
+BLAKE      01-MAY-81         13700.6072
+CLARK      09-JUN-81         13661.6072
+SCOTT      19-APR-87         11521.6072
+KING       17-NOV-81         13500.6072
+TURNER     08-SEP-81         13570.6072
+ADAMS      23-MAY-87         11487.6072
+
+ENAME      HIREDATE  (SYSDATE-HIREDATE)
+---------- --------- ------------------
+JAMES      03-DEC-81         13484.6072
+FORD       03-DEC-81         13484.6072
+MILLER     23-JAN-82         13433.6072
+
+14 rows selected.
+
+SQL> SELECT SYSDATE FROM DUAL
+  2  ;
+
+SYSDATE
+---------
+03-NOV-18
+
+SQL> SELECT ENAME,HIREDATE,MONTHS_BETWEEN(SYSDATE,HIREDATE) "NO OF MONTHS EMPLOYED" FROM EMP
+  2  WHERE NO OF MONTHS EMPLOYED > 144;
+WHERE NO OF MONTHS EMPLOYED > 144
+         *
+ERROR at line 2:
+ORA-00920: invalid relational operator
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,HIREDATE,MONTHS_BETWEEN(SYSDATE,HIREDATE) "NO OF MONTHS EMPLOYED" FROM EMP
+  2* WHERE MONTHS_BETWEEN(SYSDATE,HIREDATE) > 144;
+SQL> /
+WHERE MONTHS_BETWEEN(SYSDATE,HIREDATE) > 144;
+                                            *
+ERROR at line 2:
+ORA-00911: invalid character
+
+
+SQL> SELECT ENAME,HIREDATE,MONTHS_BETWEEN(SYSDATE,HIREDATE) "NO OF MONTHS EMPLOYED" FROM EMP;
+
+ENAME      HIREDATE  NO OF MONTHS EMPLOYED
+---------- --------- ---------------------
+SMITH      17-DEC-80            454.568136
+ALLEN      20-FEB-81            452.471362
+WARD       22-FEB-81            452.406846
+JONES      02-APR-81            451.052007
+MARTIN     28-SEP-81            445.213297
+BLAKE      01-MAY-81            450.084265
+CLARK      09-JUN-81              448.8262
+SCOTT      19-APR-87             378.50362
+KING       17-NOV-81            443.568136
+TURNER     08-SEP-81            445.858458
+ADAMS      23-MAY-87            377.374587
+
+ENAME      HIREDATE  NO OF MONTHS EMPLOYED
+---------- --------- ---------------------
+JAMES      03-DEC-81                   443
+FORD       03-DEC-81                   443
+MILLER     23-JAN-82            441.374587
+
+14 rows selected.
+
+SQL> SELECT ENAME,HIREDATE,MONTHS_BETWEEN(SYSDATE,HIREDATE) "NO OF MONTHS EMPLOYED" FROM EMP
+  2  WHERE MONTHS_BETWEEN(SYSDATE,HIREDATE) > 144
+  3  ;
+
+ENAME      HIREDATE  NO OF MONTHS EMPLOYED
+---------- --------- ---------------------
+SMITH      17-DEC-80             454.56816
+ALLEN      20-FEB-81            452.471386
+WARD       22-FEB-81             452.40687
+JONES      02-APR-81            451.052031
+MARTIN     28-SEP-81            445.213321
+BLAKE      01-MAY-81            450.084289
+CLARK      09-JUN-81            448.826225
+SCOTT      19-APR-87            378.503644
+KING       17-NOV-81             443.56816
+TURNER     08-SEP-81            445.858483
+ADAMS      23-MAY-87            377.374612
+
+ENAME      HIREDATE  NO OF MONTHS EMPLOYED
+---------- --------- ---------------------
+JAMES      03-DEC-81                   443
+FORD       03-DEC-81                   443
+MILLER     23-JAN-82            441.374612
+
+14 rows selected.
+
+SQL> SELECT ENAME,JOB,HIREDATE FROM EMP WHERE JOB='MANAGER' AND HIREDATE LIKE '%07';
+
+no rows selected
+
+SQL> SELECT ENAME,JOB,HIREDATE FROM EMP WHERE JOB='MANAGER' AND HIREDATE LIKE '%07';
+
+no rows selected
+
+SQL> SELECT ENAME,JOB,HIREDATE FROM EMP WHERE JOB='MANAGER' AND EXTRACT(YEAR FROM "HIREDATE")=2007 ;
+
+no rows selected
+
+SQL> SELECT ENAME,JOB,HIREDATE FROM EMP WHERE JOB='MANAGER' AND EXTRACT(YEAR FROM "HIREDATE")=1980 ;
+
+no rows selected
+
+SQL> SELECT ENAME,JOB,HIREDATE,EXTRACT(YEAR FROM "HIREDATE") AS YEAR FROM EMP;
+
+ENAME      JOB       HIREDATE        YEAR
+---------- --------- --------- ----------
+SMITH      CLERK     17-DEC-80       1980
+ALLEN      SALESMAN  20-FEB-81       1981
+WARD       SALESMAN  22-FEB-81       1981
+JONES      MANAGER   02-APR-81       1981
+MARTIN     SALESMAN  28-SEP-81       1981
+BLAKE      MANAGER   01-MAY-81       1981
+CLARK      MANAGER   09-JUN-81       1981
+SCOTT      ANALYST   19-APR-87       1987
+KING       PRESIDENT 17-NOV-81       1981
+TURNER     SALESMAN  08-SEP-81       1981
+ADAMS      CLERK     23-MAY-87       1987
+
+ENAME      JOB       HIREDATE        YEAR
+---------- --------- --------- ----------
+JAMES      CLERK     03-DEC-81       1981
+FORD       ANALYST   03-DEC-81       1981
+MILLER     CLERK     23-JAN-82       1982
+
+14 rows selected.
+
+SQL> SELECT ENAME,JOB,HIREDATE,EXTRACT(YEAR FROM "HIREDATE") AS YEAR FROM EMP
+  2  WHERE EXTRACT(YEAR FROM "HIREDATE") = 1980 ;
+
+ENAME      JOB       HIREDATE        YEAR
+---------- --------- --------- ----------
+SMITH      CLERK     17-DEC-80       1980
+
+SQL> SELECT ENAME,JOB,HIREDATE FROM EMP WHERE JOB='CLERK' AND EXTRACT(YEAR FROM "HIREDATE")=1980 ;
+
+ENAME      JOB       HIREDATE
+---------- --------- ---------
+SMITH      CLERK     17-DEC-80
+
+SQL> SELECT ENAME,JOB,HIREDATE FROM EMP WHERE JOB='CLERK' AND EXTRACT(YEAR FROM 'HIREDATE')=1980 ;
+SELECT ENAME,JOB,HIREDATE FROM EMP WHERE JOB='CLERK' AND EXTRACT(YEAR FROM 'HIREDATE')=1980
+                                                                           *
+ERROR at line 1:
+ORA-30076: invalid extract field for extract source
+
+
+SQL> SELECT ENAME,JOB,HIREDATE FROM EMP WHERE JOB='CLERK' AND EXTRACT(YEAR FROM HIREDATE)=1980 ;
+
+ENAME      JOB       HIREDATE
+---------- --------- ---------
+SMITH      CLERK     17-DEC-80
+
+SQL> SELECT ENAME,JOB,HIREDATE,EXTRACT(YEAR FROM HIREDATE) AS YEAR FROM EMP
+  2  WHERE EXTRACT(YEAR FROM HIREDATE) = 1980 ;
+
+ENAME      JOB       HIREDATE        YEAR
+---------- --------- --------- ----------
+SMITH      CLERK     17-DEC-80       1980
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,JOB,HIREDATE,EXTRACT(YEAR FROM HIREDATE) AS YEAR FROM EMP
+  2* WHERE EXTRACT(YEAR FROM HIREDATE) = 1980 AND JOB='MANAGER' ;
+SQL> /
+WHERE EXTRACT(YEAR FROM HIREDATE) = 1980 AND JOB='MANAGER' ;
+                                                           *
+ERROR at line 2:
+ORA-00911: invalid character
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,JOB,HIREDATE,EXTRACT(YEAR FROM HIREDATE) AS YEAR FROM EMP
+  2* WHERE EXTRACT(YEAR FROM HIREDATE) = 1980 AND JOB='MANAGER';
+SQL> /
+WHERE EXTRACT(YEAR FROM HIREDATE) = 1980 AND JOB='MANAGER';
+                                                          *
+ERROR at line 2:
+ORA-00911: invalid character
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,JOB,HIREDATE,EXTRACT(YEAR FROM HIREDATE) AS YEAR FROM EMP
+  2* WHERE EXTRACT(YEAR FROM HIREDATE) = 1980 AND JOB='MANAGER'
+SQL> /
+
+no rows selected
+
+SQL> /
+
+no rows selected
+
+SQL> SELECT ENAME||','||JOB FROM EMP;
+
+ENAME||','||JOB
+--------------------
+SMITH,CLERK
+ALLEN,SALESMAN
+WARD,SALESMAN
+JONES,MANAGER
+MARTIN,SALESMAN
+BLAKE,MANAGER
+CLARK,MANAGER
+SCOTT,ANALYST
+KING,PRESIDENT
+TURNER,SALESMAN
+ADAMS,CLERK
+
+ENAME||','||JOB
+--------------------
+JAMES,CLERK
+FORD,ANALYST
+MILLER,CLERK
+
+14 rows selected.
+
+SQL> SELECT ENAME||','||JOB AS ENAME_JOB FROM EMP;
+
+ENAME_JOB
+--------------------
+SMITH,CLERK
+ALLEN,SALESMAN
+WARD,SALESMAN
+JONES,MANAGER
+MARTIN,SALESMAN
+BLAKE,MANAGER
+CLARK,MANAGER
+SCOTT,ANALYST
+KING,PRESIDENT
+TURNER,SALESMAN
+ADAMS,CLERK
+
+ENAME_JOB
+--------------------
+JAMES,CLERK
+FORD,ANALYST
+MILLER,CLERK
+
+14 rows selected.
+
+SQL> SELECT UPPER(SUBSTR(ENAME,0,1))||LOWER(SUBSTR(ENAME,1,LENGTH(ENAME)-1)) AS CAPITAL FROM EMP;
+
+CAPITAL
+--------------------------------------------
+Ssmit
+Aalle
+Wwar
+Jjone
+Mmarti
+Bblak
+Cclar
+Sscot
+Kkin
+Tturne
+Aadam
+
+CAPITAL
+--------------------------------------------
+Jjame
+Ffor
+Mmille
+
+14 rows selected.
+
+SQL> SELECT UPPER(SUBSTR(ENAME,0,1))||LOWER(SUBSTR(ENAME,2,LENGTH(ENAME)-1)) AS CAPITAL FROM EMP;
+
+CAPITAL
+----------------------------------------
+Smith
+Allen
+Ward
+Jones
+Martin
+Blake
+Clark
+Scott
+King
+Turner
+Adams
+
+CAPITAL
+----------------------------------------
+James
+Ford
+Miller
+
+14 rows selected.
+
+SQL> SELECT RPAD(ENAME,15,'$') AS ENAME FROM EMP;
+
+ENAME
+------------------------------------------------------------
+SMITH$$$$$$$$$$
+ALLEN$$$$$$$$$$
+WARD$$$$$$$$$$$
+JONES$$$$$$$$$$
+MARTIN$$$$$$$$$
+BLAKE$$$$$$$$$$
+CLARK$$$$$$$$$$
+SCOTT$$$$$$$$$$
+KING$$$$$$$$$$$
+TURNER$$$$$$$$$
+ADAMS$$$$$$$$$$
+
+ENAME
+------------------------------------------------------------
+JAMES$$$$$$$$$$
+FORD$$$$$$$$$$$
+MILLER$$$$$$$$$
+
+14 rows selected.
+
+SQL> SELECT RPAD(ENAME,15,' ') AS ENAME FROM EMP;
+
+ENAME
+------------------------------------------------------------
+SMITH
+ALLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER
+ADAMS
+
+ENAME
+------------------------------------------------------------
+JAMES
+FORD
+MILLER
+
+14 rows selected.
+
+SQL> SELECT RPAD(ENAME,15,'-') AS ENAME FROM EMP;
+
+ENAME
+------------------------------------------------------------
+SMITH----------
+ALLEN----------
+WARD-----------
+JONES----------
+MARTIN---------
+BLAKE----------
+CLARK----------
+SCOTT----------
+KING-----------
+TURNER---------
+ADAMS----------
+
+ENAME
+------------------------------------------------------------
+JAMES----------
+FORD-----------
+MILLER---------
+
+14 rows selected.
+
+SQL> SELECT LENGTH(ENAME) AS ENAME_LENGTH FROM EMP;
+
+ENAME_LENGTH
+------------
+           5
+           5
+           4
+           5
+           6
+           5
+           5
+           5
+           4
+           6
+           5
+
+ENAME_LENGTH
+------------
+           5
+           4
+           6
+
+14 rows selected.
+
+SQL> SELECT CPAD(ENAME,20,' ') AS ENAME FROM EMP;
+SELECT CPAD(ENAME,20,' ') AS ENAME FROM EMP
+       *
+ERROR at line 1:
+ORA-00904: "CPAD": invalid identifier
+
+
+SQL> SELECT CPAD('ABC',20,'#') AS ENAME FROM EMP;
+SELECT CPAD('ABC',20,'#') AS ENAME FROM EMP
+       *
+ERROR at line 1:
+ORA-00904: "CPAD": invalid identifier
+
+
+SQL> SELECT LPAD(RPAD(ENAME,LENGTH(ENAME)+
+  2  (20-LENGTH(ENAME))/2,'*'),20,'*') AS CENTREPAD FROM EMP;
+
+CENTREPAD
+--------------------------------------------------------------------------------
+********SMITH*******
+********ALLEN*******
+********WARD********
+********JONES*******
+*******MARTIN*******
+********BLAKE*******
+********CLARK*******
+********SCOTT*******
+********KING********
+*******TURNER*******
+********ADAMS*******
+
+CENTREPAD
+--------------------------------------------------------------------------------
+********JAMES*******
+********FORD********
+*******MILLER*******
+
+14 rows selected.
+
+SQL> SELECT ENAME FROM EMP WHERE SUBSTR(ENAME,0,1)='A'
+  2
+SQL> SELECT TRIM(LEADING 'A' FROM ENAME) AS LEAD_TRIM FROM EMP;
+
+LEAD_TRIM
+----------
+SMITH
+LLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER
+DAMS
+
+LEAD_TRIM
+----------
+JAMES
+FORD
+MILLER
+
+14 rows selected.
+
+SQL> SELECT TRIM(TRAILING 'R' FROM ENAME) AS TRAIL_TRIM FROM EMP;
+
+TRAIL_TRIM
+----------
+SMITH
+ALLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNE
+ADAMS
+
+TRAIL_TRIM
+----------
+JAMES
+FORD
+MILLE
+
+14 rows selected.
+
+SQL> SELECT SUBSTR(ENAME,0,3) AS THREE_CHAR FROM ENAME;
+SELECT SUBSTR(ENAME,0,3) AS THREE_CHAR FROM ENAME
+                                            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT SUBSTR(ENAME,0,3) AS THREE_CHAR FROM EMP;
+
+THREE_CHAR
+------------
+SMI
+ALL
+WAR
+JON
+MAR
+BLA
+CLA
+SCO
+KIN
+TUR
+ADA
+
+THREE_CHAR
+------------
+JAM
+FOR
+MIL
+
+14 rows selected.
+
+SQL> SELECT SUBSTR(ENAME,LENGTH(ENAME)-3,LENGTH(ENAME)) AS LAST_THREE_CHAR FROM EMP;
+
+LAST_THREE_CHAR
+----------------------------------------
+MITH
+LLEN
+WARD
+ONES
+RTIN
+LAKE
+LARK
+COTT
+KING
+RNER
+DAMS
+
+LAST_THREE_CHAR
+----------------------------------------
+AMES
+FORD
+LLER
+
+14 rows selected.
+
+SQL> SELECT SUBSTR(ENAME,LENGTH(ENAME)-4,LENGTH(ENAME)) AS LAST_THREE_CHAR FROM EMP;
+
+LAST_THREE_CHAR
+----------------------------------------
+SMITH
+ALLEN
+WARD
+JONES
+ARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+URNER
+ADAMS
+
+LAST_THREE_CHAR
+----------------------------------------
+JAMES
+FORD
+ILLER
+
+14 rows selected.
+
+SQL> SELECT SUBSTR(ENAME,LENGTH(ENAME)-2,LENGTH(ENAME)) AS LAST_THREE_CHAR FROM EMP;
+
+LAST_THREE_CHAR
+----------------------------------------
+ITH
+LEN
+ARD
+NES
+TIN
+AKE
+ARK
+OTT
+ING
+NER
+AMS
+
+LAST_THREE_CHAR
+----------------------------------------
+MES
+ORD
+LER
+
+14 rows selected.
+
+SQL> SELECT REPLACE(ENAME,'A','E') AS REPLACED FROM EMP;
+
+REPLACED
+----------
+SMITH
+ELLEN
+WERD
+JONES
+MERTIN
+BLEKE
+CLERK
+SCOTT
+KING
+TURNER
+EDEMS
+
+REPLACED
+----------
+JEMES
+FORD
+MILLER
+
+14 rows selected.
+
+SQL> SELECT ENAME,INSTR(ENAME,'AR',1) AS POSITION FROM EMP;
+
+ENAME        POSITION
+---------- ----------
+SMITH               0
+ALLEN               0
+WARD                2
+JONES               0
+MARTIN              2
+BLAKE               0
+CLARK               3
+SCOTT               0
+KING                0
+TURNER              0
+ADAMS               0
+
+ENAME        POSITION
+---------- ----------
+JAMES               0
+FORD                0
+MILLER              0
+
+14 rows selected.
+
+SQL> SELECT ENAME,CEILING(SAL/1000.0)*1000 AS ROUND_TO_1000 FROM EMP;
+SELECT ENAME,CEILING(SAL/1000.0)*1000 AS ROUND_TO_1000 FROM EMP
+             *
+ERROR at line 1:
+ORA-00904: "CEILING": invalid identifier
+
+
+SQL> SELECT ENAME,CEIL(SAL/1000.0)*1000 AS ROUND_TO_1000 FROM EMP;
+
+ENAME      ROUND_TO_1000
+---------- -------------
+SMITH               1000
+ALLEN               2000
+WARD                2000
+JONES               3000
+MARTIN              2000
+BLAKE               3000
+CLARK               3000
+SCOTT               3000
+KING                5000
+TURNER              2000
+ADAMS               2000
+
+ENAME      ROUND_TO_1000
+---------- -------------
+JAMES               1000
+FORD                3000
+MILLER              2000
+
+14 rows selected.
+
+SQL> SELECT ENAME,(SAL/30.0) AS DAILY_SAL FROM EMP;
+
+ENAME       DAILY_SAL
+---------- ----------
+SMITH      26.6666667
+ALLEN      53.3333333
+WARD       41.6666667
+JONES      99.1666667
+MARTIN     41.6666667
+BLAKE              95
+CLARK      81.6666667
+SCOTT             100
+KING       166.666667
+TURNER             50
+ADAMS      36.6666667
+
+ENAME       DAILY_SAL
+---------- ----------
+JAMES      31.6666667
+FORD              100
+MILLER     43.3333333
+
+14 rows selected.
+
+SQL> SELECT ENAME,(SAL/30) AS DAILY_SAL FROM EMP;
+
+ENAME       DAILY_SAL
+---------- ----------
+SMITH      26.6666667
+ALLEN      53.3333333
+WARD       41.6666667
+JONES      99.1666667
+MARTIN     41.6666667
+BLAKE              95
+CLARK      81.6666667
+SCOTT             100
+KING       166.666667
+TURNER             50
+ADAMS      36.6666667
+
+ENAME       DAILY_SAL
+---------- ----------
+JAMES      31.6666667
+FORD              100
+MILLER     43.3333333
+
+14 rows selected.
+
+SQL> SELECT ENAME,ROUND((SAL/30),0) AS DAILY_SAL FROM EMP;
+
+ENAME       DAILY_SAL
+---------- ----------
+SMITH              27
+ALLEN              53
+WARD               42
+JONES              99
+MARTIN             42
+BLAKE              95
+CLARK              82
+SCOTT             100
+KING              167
+TURNER             50
+ADAMS              37
+
+ENAME       DAILY_SAL
+---------- ----------
+JAMES              32
+FORD              100
+MILLER             43
+
+14 rows selected.
+
+SQL> SELECT ENAME,ROUND((SAL*0.20),0) AS BONUS FROM EMP;
+
+ENAME           BONUS
+---------- ----------
+SMITH             160
+ALLEN             320
+WARD              250
+JONES             595
+MARTIN            250
+BLAKE             570
+CLARK             490
+SCOTT             600
+KING             1000
+TURNER            300
+ADAMS             220
+
+ENAME           BONUS
+---------- ----------
+JAMES             190
+FORD              600
+MILLER            260
+
+14 rows selected.
+
+SQL> SELECT ENAME,ROUND((SAL*0.20),0) AS BONUS FROM EMP
+  2  IF ROUND((SAL*0.20),0) > 500
+  3  THEN ROUND((SAL*0.20),0) = 500;
+IF ROUND((SAL*0.20),0) > 500
+   *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT ENAME,ROUND((SAL*0.20),0) AS BONUS FROM EMP
+  2  IF ROUND((SAL*0.20),0) > 500
+  3  IF ROUND((SAL*0.20),0) > 500
+  4  END IF ;
+IF ROUND((SAL*0.20),0) > 500
+   *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT ENAME,ROUND((SAL*0.20),0) AS BONUS
+  2  WHEN ROUND((SAL*0.20),0) > 500
+  3  THEN ROUND((SAL*0.20),0) = 500
+  4  END
+  5  FROM EMP;
+WHEN ROUND((SAL*0.20),0) > 500
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT ENAME,ROUND((SAL*0.20),0) AS BONUS
+  2  WHEN ROUND((SAL*0.20),0) > 500
+  3  THEN ROUND((SAL*0.20),0) = 500
+  4  END FROM END;
+WHEN ROUND((SAL*0.20),0) > 500
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT ENAME,ROUND((SAL*0.20),0) AS BONUS
+  2  CASE WHEN EMP.ROUND((SAL*0.20),0) > 500
+  3  THEN EMP.ROUND((SAL*0.20),0) = 500
+  4  END FROM EMP E;
+CASE WHEN EMP.ROUND((SAL*0.20),0) > 500
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT
+  2  CASE WHEN ROUND((E.SAL*0.20),0) > 500
+  3  THEN ROUND((E.SAL*0.20),0) = 500
+  4* END "MAX_BONUS" FROM EMP E
+SQL> /
+THEN ROUND((E.SAL*0.20),0) = 500
+                           *
+ERROR at line 3:
+ORA-00905: missing keyword
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT
+  2  ROUND(CASE WHEN (E.SAL*0.20) < 500
+  3  THEN (E.SAL*0.20) ELSE 500 END ,0)
+  4* "MAX_BONUS" FROM EMP E
+SQL> /
+
+ MAX_BONUS
+----------
+       160
+       320
+       250
+       500
+       250
+       500
+       490
+       500
+       500
+       300
+       220
+
+ MAX_BONUS
+----------
+       190
+       500
+       260
+
+14 rows selected.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,SAL,
+  2  ROUND(CASE WHEN (E.SAL*0.20) < 500
+  3  THEN (E.SAL*0.20) ELSE 500 END ,0)
+  4* "BONUS_SUBJ_TO_500" FROM EMP E
+SQL> /
+
+ENAME             SAL BONUS_SUBJ_TO_500
+---------- ---------- -----------------
+SMITH             800               160
+ALLEN            1600               320
+WARD             1250               250
+JONES            2975               500
+MARTIN           1250               250
+BLAKE            2850               500
+CLARK            2450               490
+SCOTT            3000               500
+KING             5000               500
+TURNER           1500               300
+ADAMS            1100               220
+
+ENAME             SAL BONUS_SUBJ_TO_500
+---------- ---------- -----------------
+JAMES             950               190
+FORD             3000               500
+MILLER           1300               260
+
+14 rows selected.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,SAL,
+  2  ROUND(CASE WHEN (E.SAL*0.20) < 500
+  3  THEN (E.SAL*0.20) ELSE 500 END ,0)
+  4* "BONUS_SUBJMAX_TO_500" FROM EMP E
+SQL> /
+
+ENAME             SAL BONUS_SUBJMAX_TO_500
+---------- ---------- --------------------
+SMITH             800                  160
+ALLEN            1600                  320
+WARD             1250                  250
+JONES            2975                  500
+MARTIN           1250                  250
+BLAKE            2850                  500
+CLARK            2450                  490
+SCOTT            3000                  500
+KING             5000                  500
+TURNER           1500                  300
+ADAMS            1100                  220
+
+ENAME             SAL BONUS_SUBJMAX_TO_500
+---------- ---------- --------------------
+JAMES             950                  190
+FORD             3000                  500
+MILLER           1300                  260
+
+14 rows selected.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,SAL,
+  2  ROUND(CASE WHEN (E.SAL*0.20) < 200
+  3  THEN (E.SAL*0.20) ELSE 200 END ,0)
+  4* "BONUS_SUBJMAX_TO_200" FROM EMP E
+SQL> /
+
+ENAME             SAL BONUS_SUBJMAX_TO_200
+---------- ---------- --------------------
+SMITH             800                  160
+ALLEN            1600                  200
+WARD             1250                  200
+JONES            2975                  200
+MARTIN           1250                  200
+BLAKE            2850                  200
+CLARK            2450                  200
+SCOTT            3000                  200
+KING             5000                  200
+TURNER           1500                  200
+ADAMS            1100                  200
+
+ENAME             SAL BONUS_SUBJMAX_TO_200
+---------- ---------- --------------------
+JAMES             950                  190
+FORD             3000                  200
+MILLER           1300                  200
+
+14 rows selected.
+
+SQL> SELECT SYSDATE FROM DUAL
+  2  ;
+
+SYSDATE
+---------
+03-NOV-18
+
+SQL> SELECT (EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM HIREDATE))*365 +
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00936: missing expression
+
+
+SQL> SELECT SYSDATE - '23-JAN-82' SUB FROM DUAL;
+SELECT SYSDATE - '23-JAN-82' SUB FROM DUAL
+                 *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> SELECT (SYSDATE - '23-JAN-82') SUB FROM DUAL;
+SELECT (SYSDATE - '23-JAN-82') SUB FROM DUAL
+                  *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> SELECT (SYSDATE - '23-JAN-82') SUB FROM DUAL;
+SELECT (SYSDATE - '23-JAN-82') SUB FROM DUAL
+                  *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> SELECT TO_DATE('19820123','YYYYMMDD') - SYSDATE "SUB" FROM EMP;
+
+       SUB
+----------
+-13433.721
+-13433.721
+-13433.721
+-13433.721
+-13433.721
+-13433.721
+-13433.721
+-13433.721
+-13433.721
+-13433.721
+-13433.721
+
+       SUB
+----------
+-13433.721
+-13433.721
+-13433.721
+
+14 rows selected.
+
+SQL> SELECT SYSDATE - TO_DATE('19820123','YYYYMMDD') "SUB" FROM EMP;
+
+       SUB
+----------
+13433.7217
+13433.7217
+13433.7217
+13433.7217
+13433.7217
+13433.7217
+13433.7217
+13433.7217
+13433.7217
+13433.7217
+13433.7217
+
+       SUB
+----------
+13433.7217
+13433.7217
+13433.7217
+
+14 rows selected.
+
+SQL> SELECT ROUND((SYSDATE - TO_DATE('19820123','YYYYMMDD')),0) "SUB" FROM EMP;
+
+       SUB
+----------
+     13434
+     13434
+     13434
+     13434
+     13434
+     13434
+     13434
+     13434
+     13434
+     13434
+     13434
+
+       SUB
+----------
+     13434
+     13434
+     13434
+
+14 rows selected.
+
+SQL> SELECT ROUND((SYSDATE - TO_DATE(HIREDATE,'YYYYMMDD')),0) "SUB" FROM EMP;
+SELECT ROUND((SYSDATE - TO_DATE(HIREDATE,'YYYYMMDD')),0) "SUB" FROM EMP
+                                *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+
+
+SQL> SELECT ROUND((SYSDATE - TO_DATE(EXTRACT(YEAR FROM ENAME)||EXTRACT(MONTH FROM HIREDATE,'YYYYMMDD')),0) "SUB" FROM EMP;
+SELECT ROUND((SYSDATE - TO_DATE(EXTRACT(YEAR FROM ENAME)||EXTRACT(MONTH FROM HIREDATE,'YYYYMMDD')),0) "SUB" FROM EMP
+                                                                                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ROUND((SYSDATE - TO_DATE(EXTRACT(YEAR FROM HIREDATE)||
+  2  EXTRACT(MONTH FROM HIREDATE)||
+  3* EXTRACT(DAY FROM HIREDATE),'YYYYMMDD')),0) "SUB" FROM EMP
+SQL> /
+ERROR:
+ORA-01843: not a valid month
+
+
+
+no rows selected
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ROUND((SYSDATE - TO_DATE(EXTRACT(YEAR FROM HIREDATE)||EXTRACT(MONTH FROM HIREDATE)||
+  2* EXTRACT(DAY FROM HIREDATE),'YYYYMMDD')),0) "SUB" FROM EMP
+SQL> /
+ERROR:
+ORA-01843: not a valid month
+
+
+
+no rows selected
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ROUND((SYSDATE - TO_DATE(EXTRACT(YEAR FROM HIREDATE)||EXTRACT(MONTH FROM HIREDATE)||
+  2* EXTRACT(DAY FROM HIREDATE),'YYYYMMDD')),0) "SUB" FROM EMP
+SQL> SELECT ROUND(SYSDATE - TO_DATE(HIREDATE,'DD-MM-YY'),0) FROM EMP;
+
+ROUND(SYSDATE-TO_DATE(HIREDATE,'DD-MM-YY'),0)
+---------------------------------------------
+                                       -22689
+                                       -22754
+                                       -22756
+                                       -22795
+                                       -22974
+                                       -22824
+                                       -22863
+                                       -25003
+                                       -23024
+                                       -22954
+                                       -25037
+
+ROUND(SYSDATE-TO_DATE(HIREDATE,'DD-MM-YY'),0)
+---------------------------------------------
+                                       -23040
+                                       -23040
+                                       -23091
+
+14 rows selected.
+
+SQL> SELECT ENAME||' JOINED ON THE '||HIREDATE
+  2  FROM EMP;
+
+ENAME||'JOINEDONTHE'||HIREDATE
+-------------------------------------------
+SMITH JOINED ON THE 17-DEC-80
+ALLEN JOINED ON THE 20-FEB-81
+WARD JOINED ON THE 22-FEB-81
+JONES JOINED ON THE 02-APR-81
+MARTIN JOINED ON THE 28-SEP-81
+BLAKE JOINED ON THE 01-MAY-81
+CLARK JOINED ON THE 09-JUN-81
+SCOTT JOINED ON THE 19-APR-87
+KING JOINED ON THE 17-NOV-81
+TURNER JOINED ON THE 08-SEP-81
+ADAMS JOINED ON THE 23-MAY-87
+
+ENAME||'JOINEDONTHE'||HIREDATE
+-------------------------------------------
+JAMES JOINED ON THE 03-DEC-81
+FORD JOINED ON THE 03-DEC-81
+MILLER JOINED ON THE 23-JAN-82
+
+14 rows selected.
+
+SQL> SELECT * FROM EMP ORDERBY ENAME
+  2  ;
+SELECT * FROM EMP ORDERBY ENAME
+                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT * FROM EMP ORDER BY ENAME
+  2  ;
+
+     EMPNO ENAME      JOB              MGR HIREDATE           SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7876 ADAMS      CLERK           7788 23-MAY-87         1100
+        20
+
+      7499 ALLEN      SALESMAN        7698 20-FEB-81         1600        300
+        30
+
+      7698 BLAKE      MANAGER         7839 01-MAY-81         2850
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE           SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7782 CLARK      MANAGER         7839 09-JUN-81         2450
+        10
+
+      7902 FORD       ANALYST         7566 03-DEC-81         3000
+        20
+
+      7900 JAMES      CLERK           7698 03-DEC-81          950
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE           SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7566 JONES      MANAGER         7839 02-APR-81         2975
+        20
+
+      7839 KING       PRESIDENT            17-NOV-81         5000
+        10
+
+      7654 MARTIN     SALESMAN        7698 28-SEP-81         1250       1400
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE           SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7934 MILLER     CLERK           7782 23-JAN-82         1300
+        10
+
+      7788 SCOTT      ANALYST         7566 19-APR-87         3000
+        20
+
+      7369 SMITH      CLERK           7902 17-DEC-80          800
+        20
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE           SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7844 TURNER     SALESMAN        7698 08-SEP-81         1500          0
+        30
+
+      7521 WARD       SALESMAN        7698 22-FEB-81         1250        500
+        30
+
+
+14 rows selected.
+
+SQL> SELECT ENAME FROM EMP ORDER BY MONTHS_BETWEEN(SYSDATE,HIREDATE) DESC ;
+
+ENAME
+----------
+SMITH
+ALLEN
+WARD
+JONES
+BLAKE
+CLARK
+TURNER
+MARTIN
+KING
+JAMES
+FORD
+
+ENAME
+----------
+MILLER
+SCOTT
+ADAMS
+
+14 rows selected.
+
+SQL> SELECT ENAME,MONTHS_BETWEEN(SYSDATE,HIREDATE) AS MON FROM EMP ORDER BY MONTHS_BETWEEN(SYSDATE,HIREDATE) DESC ;
+
+ENAME             MON
+---------- ----------
+SMITH      454.572056
+ALLEN      452.475282
+WARD       452.410766
+JONES      451.055927
+BLAKE      450.088185
+CLARK      448.830121
+TURNER     445.862379
+MARTIN     445.217217
+KING       443.572056
+JAMES             443
+FORD              443
+
+ENAME             MON
+---------- ----------
+MILLER     441.378508
+SCOTT       378.50754
+ADAMS      377.378508
+
+14 rows selected.
+
+SQL> SELECT ENAME,ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE),0) AS MON FROM EMP ORDER BY MONTHS_BETWEEN(SYSDATE,HIREDATE) DESC ;
+
+ENAME             MON
+---------- ----------
+SMITH             455
+ALLEN             452
+WARD              452
+JONES             451
+BLAKE             450
+CLARK             449
+TURNER            446
+MARTIN            445
+KING              444
+JAMES             443
+FORD              443
+
+ENAME             MON
+---------- ----------
+MILLER            441
+SCOTT             379
+ADAMS             377
+
+14 rows selected.
+
+SQL>
