@@ -1,29 +1,167 @@
+<!doctype html>
 <html>
 <head>
-<title>registration</title>
+<title>Registration Form</title>
 </head>
-<body>
-<center>
-<form method="post" action="login.html">
-<p><strong>name:</strong>
-<input type="text" name="username" size="25">
-</p>
-<p><strong>password</strong>
-<input name="pass" type="password" size="6"></p>
-<p><strong>male</strong>
-<input type="radio" value="male"<hacked>&nbsp&nbsp</p>
-<p><strong>female</strong>
-<input type="radio" value="female" </p>
-<p><strong>address:</strong>
-<textarea name="address" row="6" cols="20">
-</textarea>
-</p>
-<p><strong>mobile no:</strong>
-<input type="text" name="phno" size="10">
-</p><br><br>
-<input type="submit" value="submit">
-<input type="reset" value="reset">
+
+<body bgcolor="navy">
+<form method="post" action="Login.html">
+<table border="0" align="center">
+<font color="white" style="font-size:100%;font-family:verdana">
+<h2 align="center">Registration Form</h2>
+</font>
+<!--<caption>Registration Form</caption>-->
+
+<tr>
+<td width="200" style="color:white;font-family:verdana" align="right">
+<label for="username"><b> Username:</b></label>
+</td>
+<td width="500">
+<input type="text" name="user" id="username" size="25">
+</td>
+</tr>
+
+<tr>
+<td style="color:white;font-family:verdana" align="right">
+<label for="password"><b>Password:</b></label>
+</td>
+<td>
+<input type="password" name="pwd" id="password" size="25">
+</td>
+</tr>
+
+<tr>
+<td style="color:white;font-family:verdana" align="right">
+<label for="emailid"><b>Email:</b></label>
+</td>
+
+<td>
+<input type="email" name="email"  id="emailid"
+placeholder="vidhya@gmail.com"
+pattern=".+@gmail.com"
+ size="25" required
+title="must be a @gmail.com email address"/>
+</td>
+</tr>
+
+<tr>
+<td style="color:white;font-family:verdana" align="right">
+<label for="phone"><b>Phone No:</b></label>
+</td>
+
+<td>
+<input type="tel" name="phone"  id="phone"
+placeholder="10-digit number"
+pattern="[0-9]{10}"
+ size="25" required
+title="must be a 10 digit number"/>
+</td>
+</tr>
+
+<tr>
+<td style="color:white;font-family:verdana" align="right">
+<label for="gender"><b> Gender:</b></label>
+</td>
+
+<td style="color:white;font-family:verdana">
+<input type="radio" name="male" id="gender" value="Male" >Male
+<input type="radio" name="female" id="gender" value="Female">Female
+</td>
+</tr>
+
+<tr>
+<td style="color:white;font-family:verdana" align="right">
+<label for="dob"><b>DOB:</b></label>
+</td>
+<td style="color:white;font-family:verdana">
+
+<input type="date" id="dob" name="dob">
+<!--
+<label for="day">Day:</label>
+<select id="day" name="day"></select>
+
+<label for="month">Month:</label>
+<select id="month" name="month">
+<option value="Jan" selected>Jan</option>
+<option value="Feb">Feb</option>
+<option value="Mar">Mar</option>
+<option value="Apr">Apr</option>
+<option value="May">May</option>
+<option value="Jun">Jun</option>
+<option value="Jul">Jul</option>
+<option value="Aug">Aug</option>
+<option value="Sep">Sep</option>
+<option value="Oct">Oct</option>
+<option value="Dec">Dec</option>
+</select>
+
+<label for="year">Year:</label>
+<select id="year" name="year">
+</select>
+
+</td>
+</tr>
+-->
+
+<tr>
+<td style="color:white;font-family:verdana" align="right">
+<label for="langknwn"><b>Languages Known:</b></label>
+</td>
+
+<td style="color:white;font-family:verdana">
+
+<input type="checkbox" name="eng" id="eng" 
+value="eng">
+<label for="eng"><b>English</b></label>
+
+<input type="checkbox" name="hin" id="hin" 
+value="hin">
+<label for="hin"><b>Hindi</b></label>
+
+<input type="checkbox" name="tam" id="tam" 
+value="tam">
+<label for="tam"><b>Tamil</b></label>
+
+<input type="checkbox" name="tel" id="tel" 
+value="tel">
+<label for="tel"><b>Telugu</b></label>
+
+</td>
+</tr>
+
+<tr>
+<td style="color:white;font-family:verdana" align="right">
+<label for="addr"><b>Address:</b></label>
+</td>
+
+<td style="color:white;font-family:verdana">
+<textarea name="addr" id="addr" rows="6" cols="25"
+placeholder="write address here">
+</textarea> 
+</td>
+</tr>
+
+<tr>
+<td>
+</td>
+
+<td>
+
+<button name="sub" style="color:black;font-family:verdana"><b>Submit</b></button>
+<button name="clr" style="color:black;font-family:verdana"><b>Clear</b></button>
+
+</td>
+</tr>
+
+
+
+
+
+
+
+
+</table>
 </form>
-</center>
+
 </body>
 </html>
