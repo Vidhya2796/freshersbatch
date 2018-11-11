@@ -1,0 +1,72 @@
+Microsoft Windows [Version 6.2.9200]
+(c) 2012 Microsoft Corporation. All rights reserved.
+
+C:\Users\c.vasanth>sqlplus
+
+SQL*Plus: Release 10.2.0.1.0 - Production on Sun Nov 11 12:18:53 2018
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Enter user-name: hr
+Enter password:
+
+Connected to:
+Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production
+
+SQL> select e.ename,e.job,e.sal,m.ename,m.job,m.sal from emp e join emp m
+  2  on e.mgr=e.empno
+  3  ;
+
+no rows selected
+
+SQL> select e.ename,e.job,e.sal,m.ename,m.job,m.sal from emp e join emp m
+  2  on e.mgr=m.empno
+  3  ;
+
+ENAME      JOB              SAL ENAME      JOB              SAL
+---------- --------- ---------- ---------- --------- ----------
+SMITH      CLERK            800 FORD       ANALYST         3000
+ALLEN      SALESMAN        1600 BLAKE      MANAGER         2850
+WARD       SALESMAN        1250 BLAKE      MANAGER         2850
+JONES      MANAGER         2975 KING       PRESIDENT       5000
+MARTIN     SALESMAN        1250 BLAKE      MANAGER         2850
+BLAKE      MANAGER         2850 KING       PRESIDENT       5000
+CLARK      MANAGER         2450 KING       PRESIDENT       5000
+SCOTT      ANALYST         3000 JONES      MANAGER         2975
+TURNER     SALESMAN        1500 BLAKE      MANAGER         2850
+ADAMS      CLERK           1100 SCOTT      ANALYST         3000
+JAMES      CLERK            950 BLAKE      MANAGER         2850
+
+ENAME      JOB              SAL ENAME      JOB              SAL
+---------- --------- ---------- ---------- --------- ----------
+FORD       ANALYST         3000 JONES      MANAGER         2975
+MILLER     CLERK           1300 CLARK      MANAGER         2450
+
+13 rows selected.
+
+SQL> select e.ename as "Employee",e.job as "Emp_Job",e.sal as "Emp_Sal",m.ename as "Manager",m.job as "Mgr_Job",m.sal as "Mgr_Sal" from emp e join emp m
+  2  on e.mgr=m.empno
+  3  ;
+
+Employee   Emp_Job      Emp_Sal Manager    Mgr_Job      Mgr_Sal
+---------- --------- ---------- ---------- --------- ----------
+SMITH      CLERK            800 FORD       ANALYST         3000
+ALLEN      SALESMAN        1600 BLAKE      MANAGER         2850
+WARD       SALESMAN        1250 BLAKE      MANAGER         2850
+JONES      MANAGER         2975 KING       PRESIDENT       5000
+MARTIN     SALESMAN        1250 BLAKE      MANAGER         2850
+BLAKE      MANAGER         2850 KING       PRESIDENT       5000
+CLARK      MANAGER         2450 KING       PRESIDENT       5000
+SCOTT      ANALYST         3000 JONES      MANAGER         2975
+TURNER     SALESMAN        1500 BLAKE      MANAGER         2850
+ADAMS      CLERK           1100 SCOTT      ANALYST         3000
+JAMES      CLERK            950 BLAKE      MANAGER         2850
+
+Employee   Emp_Job      Emp_Sal Manager    Mgr_Job      Mgr_Sal
+---------- --------- ---------- ---------- --------- ----------
+FORD       ANALYST         3000 JONES      MANAGER         2975
+MILLER     CLERK           1300 CLARK      MANAGER         2450
+
+13 rows selected.
+
+SQL>
