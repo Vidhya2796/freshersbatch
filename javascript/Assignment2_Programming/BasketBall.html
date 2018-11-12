@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<title>BASKET_BALL</title>
+</head>
+
+<body>
+<script>
+var m1,m2,m3,j1,j2,j3,m_avg,j_avg;
+
+m1=parseInt(prompt("Enter Mark team's score 1","Score1"));
+m2=parseInt(prompt("Enter Mark team's score 2","Score2"));
+m3=parseInt(prompt("Enter Mark team's score 3","Score3"));
+
+j1=parseInt(prompt("Enter John team's score 1","Score1"));
+j2=parseInt(prompt("Enter John team's score 2","Score2"));
+j3=parseInt(prompt("Enter John team's score 3","Score3"));
+
+m_avg=(m1+m2+m3)/3;
+j_avg=(j1+j2+j3)/3;
+m_avg=Math.round(m_avg)
+j_avg=Math.round(j_avg)
+if (m_avg > j_avg)
+{
+	document.write("Average of Mark's team is "+m_avg+"<br/>");
+	document.write("Average of John's team is "+j_avg+"<br/>")
+	document.write("Mark's team is the WINNER!");
+}
+else if(m_avg < j_avg)
+{
+	document.write("Average of Mark's team is "+m_avg+"<br/>");
+	document.write("Average of John's team is "+j_avg+"<br/>")
+	document.write("John's team is the WINNER!");
+}
+else
+{
+	document.write("Average of Mark's team is "+m_avg+"<br/>");
+	document.write("Average of John's team is "+j_avg+"<br/>")
+	document.write("This Match is drawn..")
+}
+</script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<title>NUM_DISPLAY</title>
+</head>
+
+
+<body>
+<script>
+var count=1;
+var num;
+
+while(count<=3)
+{
+num=parseInt(prompt("enter no","number"));
+if(num >1 && num <30)
+{
+count++;
+for(i=1;i<=num;i++)
+document.write("*");
+
+document.write("<br />");
+}
+else
+alert("enter a value between 1 and 30");
+}
+
+</script>
+</body>
+
+
+
+
+</html>

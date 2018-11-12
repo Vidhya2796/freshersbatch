@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>BMI Calculation</title>
+</head>
+
+<body>
+<script type="text/javascript">
+//getting input from user
+var mark_height=prompt("Enter Mark's height","height in meters")
+var mark_weight=prompt("Enter Mark's weight","weight in kg")
+var john_height=prompt("Enter John's height","height in meters")
+var john_weight=prompt("Enter John's weight","weight in kg")
+
+//Calculating BMI
+var mark_bmi=mark_weight/(mark_height * mark_height)
+var john_bmi=john_weight/(john_height * john_height)
+
+alert("Mark's BMI is "+ mark_bmi)
+alert("John's BMI is "+ john_bmi)
+
+if(mark_bmi > john_bmi)
+document.write("Is Mark's BMI higher than John's? true")
+else
+document.write("Is Mark's BMI higher than John's? false")
+
+
+//var msg=(mark_bmi > john_bmi) ? "Mark's BMI is lesser than John's" : "Mark's BMI is higher than John's"
+//document.write(msg)-->
+
+</script>
+</body>
+</html>

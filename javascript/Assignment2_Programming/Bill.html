@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BILL</title>
+
+<script>
+
+function TipCalc(){
+document.write("hi..."+"<br/>");
+
+var b1,b2,b3,a1,a2,a3,t1,t2,t3;
+
+b1=parseInt(prompt("Enter John's Bill 1","Bill 1"));
+b2=parseInt(prompt("Enter John's Bill 2","Bill 2"));
+b3=parseInt(prompt("Enter John's Bill 3","Bill 3"));
+
+if (b1 <50)
+{
+t1=b1*0.2;
+a1=b1+t1;
+}
+
+else if (b1 > 49 && b1 <201)
+{
+t1=b1*0.15;
+a1=b1+t1;
+}
+else
+{
+t1=b1*0.1;
+a1=b1+t1;
+}
+
+
+
+if (b2 <50)
+{
+t2=b2*0.2;
+a2=b2+t2;
+}
+
+else if (b2 > 49 && b2 <201)
+{
+t2=b2*0.15;
+a2=b2+t2;
+}
+else
+{
+t2=b2*0.1;
+a2=b2+t2;
+}
+
+
+if (b3 <50)
+{
+t3=b3*0.2;
+a3=b3+t3;
+}
+
+else if (b3 > 49 && b3 <201)
+{
+t3=b3*0.15;
+a3=b3+t3;
+}
+else
+{
+t3=b3*0.1;
+a3=b3+t3;
+}
+var tips=new Array(t1,t2,t3);
+var amt=new Array(a1,a2,a3);
+
+document.write("The tips for Bill1 "+b1+" is "+tips[t1]+"<br/>");
+document.write("The amount for Bill1 "+b1+" is "+amt[a1]+"<br/>");
+
+
+document.write("The tips for Bill2 "+b2+" is "+tips[t2]+"<br/>");
+document.write("The amount for Bill2 "+b2+" is "+amt[a2]+"<br/>");
+
+document.write("The tips for Bill3 "+b3+" is "+tips[t3]+"<br/>");
+document.write("The amount for Bill3 "+b3+" is "+amt[a3]+"<br/>");
+}
+
+</script>
+</head>
+
+<body onload="TipCalc()">
+
+
+
+</body>
+</html>

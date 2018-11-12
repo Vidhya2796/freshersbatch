@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Temperature Calculation</title>
+
+<script type="text/javascript">
+function Convert()
+{
+var f,c;
+f=document.getElementById("F").value
+if(f == "" || isNaN(f))
+{
+alert("pls provide a proper value")
+document.myForm.FahTemp.value=""
+document.myForm.FahTemp.focus()
+//document.getElementById("F")=document.getElementById("F").clear
+//document.getElementById("F")=document.getElementById("F").focus
+}
+else
+{
+c=(f-32)*5/9
+document.write(Math.round(c)+ " degree celsius")
+document.myForm.FahTemp.value="";
+document.myForm.FahTemp.focus();
+}
+
+}
+</script>
+</head>
+
+<body onload="document.myForm.FahTemp.focus()">
+<form action="#" name="myForm">
+<table border="0" align="center" width="500">
+<tr>
+<td width="30" align="right">
+
+<label for="F">Enter Farenheit Value:</label>
+</td>
+<td width="200">
+<input id="F" name="FahTemp" type="text" size="20">
+
+</td>
+</tr>
+
+<tr>
+<td align="right">
+<input type="button" value="Show Results" onclick="Convert()">
+</td>
+</tr>
+
+
+</table>
+</form>
+</body>
+
+</html>
